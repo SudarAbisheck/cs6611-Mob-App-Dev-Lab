@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="dept_values">
+        <item name="cse">@string/cse_string</item>
+        <item name="it">@string/it_string</item>
+        <item name="ece">@string/ece_string</item>
+        <item name="eee">@string/eee_string</item>
+        <item name="mech">@string/mech_string</item>
+    </string-array>
+</resources>
