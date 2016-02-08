@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">"Lab Form "</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="cse_string">CSE</string>
+    <string name="it_string">IT</string>
+    <string name="ece_string">ECE</string>
+    <string name="eee_string">EEE</string>
+    <string name="mech_string">MECH</string>
+</resources>
