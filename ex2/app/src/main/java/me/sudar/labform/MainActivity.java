@@ -74,21 +74,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         year = yearOfMil;
                     }
                 };
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, onDateSetListener, 2016, 2, 8);
-                    datePickerDialog.setTitle("Select Time");
-                    datePickerDialog.show();
-                break;
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, onDateSetListener, 2016, 2, 8);
+                datePickerDialog.setTitle("Select Time");
+                datePickerDialog.show();
+            break;
 
             case R.id.reset_button:
                 nameEditText.setText("");
                 collegeEditText.setText("");
                 genderRadioGroup.clearCheck();
-                deptSpinner.setPromptId(R.string.cse_string);
-                break;
+                deptSpinner.setSelection(0);
+            break;
 
             case R.id.submit_button:
 
-                break;
+            break;
         }
     }
 }
