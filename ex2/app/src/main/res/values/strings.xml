@@ -7,4 +7,5 @@
     <string name="ece_string">ECE</string>
     <string name="eee_string">EEE</string>
     <string name="mech_string">MECH</string>
+    <string name="title_activity_details">Form Details</string>
 </resources>

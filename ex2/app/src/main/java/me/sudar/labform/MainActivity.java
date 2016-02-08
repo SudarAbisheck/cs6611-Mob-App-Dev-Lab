@@ -1,22 +1,16 @@
 package me.sudar.labform;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -25,9 +19,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RadioGroup genderRadioGroup;
     private Spinner deptSpinner;
 
-    private int day;
-    private int month;
-    private int year;
+    private Integer day = null;
+    private Integer month = null;
+    private Integer year = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.date_picker_button:
@@ -70,12 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onDateSet(DatePicker view, int yearOfMil, int monthOfYear, int dayOfMonth) {
                         day = dayOfMonth;
-                        month = monthOfYear;
+                        month = monthOfYear + 1;
                         year = yearOfMil;
                     }
                 };
-                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, onDateSetListener, 2016, 2, 8);
-                datePickerDialog.setTitle("Select Time");
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this, onDateSetListener, 2016, 1, 8);
+                datePickerDialog.setTitle("Select DOB");
                 datePickerDialog.show();
             break;
 
@@ -84,10 +62,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 collegeEditText.setText("");
                 genderRadioGroup.clearCheck();
                 deptSpinner.setSelection(0);
+                day = null;
+                month = null;
+                year = null;
             break;
 
             case R.id.submit_button:
+                int selectedGenderId = genderRadioGroup.getCheckedRadioButtonId();
+                RadioButton selectedGender = (RadioButton) findViewById(selectedGenderId);
 
+                Bundle data = new Bundle();
+                data.putString("dob", day + "-" + month + "-" + year);
+                data.putString("name", nameEditText.getText().toString());
+                data.putString("college", collegeEditText.getText().toString());
+                data.putString("gender", selectedGender.getText().toString());
+                data.putString("dept", deptSpinner.getSelectedItem().toString());
+
+                Intent intent = new Intent(this, DetailsActivity.class);
+                intent.putExtra("form-data",data);
+
+                startActivity(intent);
             break;
         }
     }
