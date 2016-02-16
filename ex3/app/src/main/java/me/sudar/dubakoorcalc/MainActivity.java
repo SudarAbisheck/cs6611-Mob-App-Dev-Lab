@@ -1,13 +1,8 @@
 package me.sudar.dubakoorcalc;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +15,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView dualTextView;
 
     private StringBuilder expr = new StringBuilder();
-    private StringBuilder ans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +48,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        String ops = "/x-+";
 
         if(id == R.id.equal){
-            Toast.makeText(this, "apram dhaan", Toast.LENGTH_SHORT).show();
-            ((TextView) findViewById(R.id.dual)).setText(getString(R.string.clr));
+            if (expr.length() != 0) {
+                char c = expr.charAt(expr.length() - 1);
+                if (c == '/' || c == 'x' || c == '-' || c == '+')
+                    expr.deleteCharAt(expr.length() - 1);
+            }
+            expr.append('=');
+            exprTextView.setText(expr.toString());
+
+            calcExpr(expr);
+
+            dualTextView.setText(getString(R.string.clr));
         }else if(id == R.id.dual){
-            String temp = ((TextView) findViewById(R.id.dual)).getText().toString();
+            String temp = dualTextView.getText().toString();
             if(temp.equals(getString(R.string.del))){
-                expr.deleteCharAt(expr.length()-1);
+                if (expr.length() != 0)
+                    expr.deleteCharAt(expr.length()-1);
             }else {
                 expr.delete(0,expr.length());
-                ((TextView) findViewById(R.id.dual)).setText(getString(R.string.del));
+                dualTextView.setText(getString(R.string.del));
             }
-            ((TextView) findViewById(R.id.expr_tv)).setText(expr.toString());
+            exprTextView.setText(expr.toString());
         }else{
-            expr.append(((TextView) findViewById(id)).getText());
-            ((TextView) findViewById(R.id.expr_tv)).setText(expr.toString());
+            String temp = dualTextView.getText().toString();
+            if(temp.equals(getString(R.string.clr))){
+                expr.delete(0,expr.length());
+                dualTextView.setText(getString(R.string.del));
+                ansTextView.setText("");
+            }else {
+                CharSequence nextInput = ((TextView) findViewById(id)).getText();
+                if (expr.length() != 0) {
+                    char c = expr.charAt(expr.length() - 1);
+                    if ((c == '/' || c == 'x' || c == '-' || c == '+') && ops.contains(nextInput))
+                        expr.deleteCharAt(expr.length() - 1);
+                }
+
+                if (!((expr.length() == 0) && ops.contains(nextInput)))
+                    expr.append(nextInput);
+
+            }
+            exprTextView.setText(expr.toString());
         }
+    }
+
+    public void calcExpr(StringBuilder expr){
+        expr.deleteCharAt(expr.length() - 1);
+//        String[] values = expr.toString().split("\\+");
+        Toast.makeText(this, "not now", Toast.LENGTH_SHORT).show();
     }
 }
