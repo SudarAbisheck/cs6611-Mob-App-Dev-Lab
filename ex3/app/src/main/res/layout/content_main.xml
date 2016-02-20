@@ -59,6 +59,17 @@
                 android:text="@string/del" />
 
             <TextView
+                android:id="@+id/mod"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#fefefe"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="%" />
+
+            <TextView
                 android:id="@+id/div"
                 android:gravity="center"
                 android:textStyle="bold"

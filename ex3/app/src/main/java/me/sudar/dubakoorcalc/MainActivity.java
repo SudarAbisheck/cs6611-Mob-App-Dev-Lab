@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.zero).setOnClickListener(this);
         findViewById(R.id.dot).setOnClickListener(this);
         findViewById(R.id.equal).setOnClickListener(this);
+        findViewById(R.id.mod).setOnClickListener(this);
         findViewById(R.id.div).setOnClickListener(this);
         findViewById(R.id.mul).setOnClickListener(this);
         findViewById(R.id.minus).setOnClickListener(this);
@@ -53,12 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        String ops = "/x-+";
+        String ops = "%/x-+";
 
         if(id == R.id.equal){
             if (expr.length() != 0) {
                 char c = expr.charAt(expr.length() - 1);
-                if (c == '/' || c == 'x' || c == '-' || c == '+')
+                if (c == '/' || c == 'x' || c == '-' || c == '+' || c == '%')
                     expr.deleteCharAt(expr.length() - 1);
             }
             expr.append('=');
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 CharSequence nextInput = ((TextView) findViewById(id)).getText();
                 if (expr.length() != 0) {
                     char c = expr.charAt(expr.length() - 1);
-                    if ((c == '/' || c == 'x' || c == '-' || c == '+') && ops.contains(nextInput))
+                    if ((c == '/' || c == 'x' || c == '-' || c == '+' || c == '%') && ops.contains(nextInput))
                         expr.deleteCharAt(expr.length() - 1);
                 }
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void calcExpr(StringBuilder expr){
         expr.deleteCharAt(expr.length() - 1);
-        String[] values = expr.toString().split("((?<=\\/)|(?=\\/)|(?<=x)|(?=x)|(?<=-)|(?=-)|(?<=\\+)|(?=\\+))"); //  http://stackoverflow.com/a/2206432/3474977
+        String[] values = expr.toString().split("((?<=\\%)|(?=\\%)|(?<=\\/)|(?=\\/)|(?<=x)|(?=x)|(?<=-)|(?=-)|(?<=\\+)|(?=\\+))"); //  http://stackoverflow.com/a/2206432/3474977
 
         List<String> postfix = new ArrayList<>();
         Stack<String> oprStack = new Stack<>();
@@ -109,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // infix to postfix starts here
         for(int i = 0 ; i < values.length ; i++){
-            if(values[i].equals("/") || values[i].equals("x") || values[i].equals("-") || values[i].equals("+")){
+            if(values[i].equals("%") || values[i].equals("/") || values[i].equals("x") || values[i].equals("-") || values[i].equals("+")){
                 if(oprStack.empty()) oprStack.push(values[i]);
                 else {
 
-                    if(values[i].equals("/") || values[i].equals("x")){
+                    if(values[i].equals("%") || values[i].equals("/") || values[i].equals("x")){
                         while(!oprStack.empty()){
                             topOfStack = oprStack.peek();
-                            if(topOfStack.equals("/") || topOfStack.equals("x"))
+                            if(topOfStack.equals("%") || topOfStack.equals("/") || topOfStack.equals("x"))
                                 postfix.add(oprStack.pop());
                         }
                         oprStack.push(values[i]);
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(values[i].equals("-") || values[i].equals("+")){
                         while(!oprStack.empty()){
                             topOfStack = oprStack.peek();
-                            if(topOfStack.equals("/") || topOfStack.equals("x") || topOfStack.equals("-") || topOfStack.equals("+"))
+                            if(topOfStack.equals("%") || topOfStack.equals("/") || topOfStack.equals("x") || topOfStack.equals("-") || topOfStack.equals("+"))
                                 postfix.add(oprStack.pop());
                         }
                         oprStack.push(values[i]);
@@ -140,6 +141,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for(String s : postfix){
             switch (s) {
+                case "%": {
+                    Double b = Double.parseDouble(oprStack.pop());
+                    Double a = Double.parseDouble(oprStack.pop());
+                    Double ans = a % b;
+                    oprStack.push(ans.toString());
+                    break;
+                }
                 case "/": {
                     Double b = Double.parseDouble(oprStack.pop());
                     Double a = Double.parseDouble(oprStack.pop());
