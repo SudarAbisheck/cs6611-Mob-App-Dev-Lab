@@ -2,9 +2,14 @@ package me.sudar.dubakoorcalc;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Stack;
 
 import sudar.me.dubakoorcalc.R;
 
@@ -70,14 +75,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else {
                 expr.delete(0,expr.length());
                 dualTextView.setText(getString(R.string.del));
+                ansTextView.setText("");
             }
             exprTextView.setText(expr.toString());
         }else{
             String temp = dualTextView.getText().toString();
-            if(temp.equals(getString(R.string.clr))){
+            if(temp.equals(getString(R.string.clr))) {
                 expr.delete(0,expr.length());
                 dualTextView.setText(getString(R.string.del));
-                ansTextView.setText("");
             }else {
                 CharSequence nextInput = ((TextView) findViewById(id)).getText();
                 if (expr.length() != 0) {
@@ -96,7 +101,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void calcExpr(StringBuilder expr){
         expr.deleteCharAt(expr.length() - 1);
-//        String[] values = expr.toString().split("\\+");
-        Toast.makeText(this, "not now", Toast.LENGTH_SHORT).show();
+        String[] values = expr.toString().split("((?<=\\/)|(?=\\/)|(?<=x)|(?=x)|(?<=-)|(?=-)|(?<=\\+)|(?=\\+))"); //  http://stackoverflow.com/a/2206432/3474977
+
+        List<String> postfix = new ArrayList<>();
+        Stack<String> oprStack = new Stack<>();
+        String topOfStack;
+
+        // infix to postfix starts here
+        for(int i = 0 ; i < values.length ; i++){
+            if(values[i].equals("/") || values[i].equals("x") || values[i].equals("-") || values[i].equals("+")){
+                if(oprStack.empty()) oprStack.push(values[i]);
+                else {
+
+                    if(values[i].equals("/") || values[i].equals("x")){
+                        while(!oprStack.empty()){
+                            topOfStack = oprStack.peek();
+                            if(topOfStack.equals("/") || topOfStack.equals("x"))
+                                postfix.add(oprStack.pop());
+                        }
+                        oprStack.push(values[i]);
+                    }
+
+                    if(values[i].equals("-") || values[i].equals("+")){
+                        while(!oprStack.empty()){
+                            topOfStack = oprStack.peek();
+                            if(topOfStack.equals("/") || topOfStack.equals("x") || topOfStack.equals("-") || topOfStack.equals("+"))
+                                postfix.add(oprStack.pop());
+                        }
+                        oprStack.push(values[i]);
+                    }
+                }
+            }else postfix.add(values[i]);
+        }
+
+        while(!oprStack.empty()) postfix.add(oprStack.pop()); // adding remaining operators in stack to the postfix expression
+        // infix to postfix ends here
+
+
+        for(String s : postfix){
+            switch (s) {
+                case "/": {
+                    Double b = Double.parseDouble(oprStack.pop());
+                    Double a = Double.parseDouble(oprStack.pop());
+                    Double ans = a / b;
+                    oprStack.push(ans.toString());
+                    break;
+                }
+                case "x": {
+                    Double b = Double.parseDouble(oprStack.pop());
+                    Double a = Double.parseDouble(oprStack.pop());
+                    Double ans = a * b;
+                    oprStack.push(ans.toString());
+                    break;
+                }
+                case "-": {
+                    Double b = Double.parseDouble(oprStack.pop());
+                    Double a = Double.parseDouble(oprStack.pop());
+                    Double ans = a - b;
+                    oprStack.push(ans.toString());
+                    break;
+                }
+                case "+": {
+                    Double b = Double.parseDouble(oprStack.pop());
+                    Double a = Double.parseDouble(oprStack.pop());
+                    Double ans = a + b;
+                    oprStack.push(ans.toString());
+                    break;
+                }
+                default:
+                    oprStack.push(s);
+                    Log.d("TTTTTTT", s);
+                    break;
+            }
+
+        }
+
+        ansTextView.setText(oprStack.pop());
+
+        Log.i("TTTTTTTT", Arrays.toString(postfix.toArray()));
     }
 }
