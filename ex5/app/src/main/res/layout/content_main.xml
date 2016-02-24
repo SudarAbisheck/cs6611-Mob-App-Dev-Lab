@@ -28,27 +28,27 @@
             android:textSize="40sp"/>
 
         <Button
-            android:id="@+id/spotify_button"
+            android:id="@+id/create_button"
             style="@style/ButtonStyle"
             android:text="@string/spotify_text"/>
 
         <Button
-            android:id="@+id/score_app_button"
+            android:id="@+id/insert_button"
             style="@style/ButtonStyle"
             android:text="@string/scores_app_text"/>
 
         <Button
-            android:id="@+id/library_app_button"
+            android:id="@+id/update_button"
             style="@style/ButtonStyle"
             android:text="@string/library_app_text"/>
 
         <Button
-            android:id="@+id/build_bigger_button"
+            android:id="@+id/delete_button"
             style="@style/ButtonStyle"
             android:text="@string/build_bigger_text"/>
 
         <Button
-            android:id="@+id/xyz_button"
+            android:id="@+id/retrieve_button"
             style="@style/ButtonStyle"
             android:text="@string/xyz_reader_text"/>
 

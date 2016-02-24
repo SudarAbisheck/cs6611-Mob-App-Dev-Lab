@@ -19,29 +19,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        findViewById(R.id.spotify_button).setOnClickListener(this);
-        findViewById(R.id.score_app_button).setOnClickListener(this);
-        findViewById(R.id.library_app_button).setOnClickListener(this);
-        findViewById(R.id.build_bigger_button).setOnClickListener(this);
-        findViewById(R.id.xyz_button).setOnClickListener(this);
-        findViewById(R.id.capstone_button).setOnClickListener(this);
+        findViewById(R.id.create_button).setOnClickListener(this);
+        findViewById(R.id.insert_button).setOnClickListener(this);
+        findViewById(R.id.update_button).setOnClickListener(this);
+        findViewById(R.id.delete_button).setOnClickListener(this);
+        findViewById(R.id.retrieve_button).setOnClickListener(this);
+
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.spotify_button :toaster(getString(R.string.spotify_msg)); break;
+            case R.id.create_button : break;
 
-            case R.id.score_app_button :toaster(getString(R.string.scores_app_msg)); break;
+            case R.id.insert_button : break;
 
-            case R.id.library_app_button :toaster(getString(R.string.library_app_msg)); break;
+            case R.id.update_button :break;
 
-            case R.id.build_bigger_button :toaster(getString(R.string.build_bigger_msg)); break;
+            case R.id.delete_button : break;
 
-            case R.id.xyz_button :toaster(getString(R.string.xyz_reader_msg)); break;
+            case R.id.retrieve_button : break;
 
-            case R.id.capstone_button :toaster(getString(R.string.capstone_msg)); break;
+
         }
 
     }
