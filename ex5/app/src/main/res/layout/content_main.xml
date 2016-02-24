@@ -23,9 +23,9 @@
             android:id="@+id/nano_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="50dp"
             android:text="@string/nano_apps"
-            android:textSize="30sp"/>
+            android:textSize="40sp"/>
 
         <Button
             android:id="@+id/spotify_button"
@@ -52,10 +52,6 @@
             style="@style/ButtonStyle"
             android:text="@string/xyz_reader_text"/>
 
-        <Button
-            android:id="@+id/capstone_button"
-            style="@style/ButtonStyle"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/capstone_text"/>
+
     </LinearLayout>
 </ScrollView>

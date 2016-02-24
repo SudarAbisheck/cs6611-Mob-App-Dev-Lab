@@ -1,13 +1,12 @@
 <resources>
     <string name="app_name">Thagaval Dappa</string>
     <string name="action_settings">Settings</string>
-    <string name="nano_apps">My Nanodegree Apps</string>
-    <string name="spotify_text">Spotify Streamer</string>
-    <string name="scores_app_text">Scores App</string>
-    <string name="library_app_text">Library App</string>
-    <string name="build_bigger_text">Build It Bigger</string>
-    <string name="xyz_reader_text">XYZ Reader</string>
-    <string name="capstone_text">Capstone Project</string>
+    <string name="nano_apps">Student DB</string>
+    <string name="spotify_text">Create</string>
+    <string name="scores_app_text">Insert</string>
+    <string name="library_app_text">Update</string>
+    <string name="build_bigger_text">Delete</string>
+    <string name="xyz_reader_text">Retrieve</string>
     <string name="spotify_msg">This Button will launch Spotify Streamer App.</string>
     <string name="scores_app_msg">This Button will launch Scores App.</string>
     <string name="library_app_msg">This Button will launch Library App.</string>
