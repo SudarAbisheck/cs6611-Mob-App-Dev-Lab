@@ -12,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-public class Insert extends AppCompatActivity implements View.OnClickListener{
+public class InsertActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText nameEditText;
     private EditText phnoEditText;

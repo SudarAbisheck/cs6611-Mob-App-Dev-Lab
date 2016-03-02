@@ -19,11 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Insert"
+            android:name=".InsertActivity"
             android:label="@string/title_activity_insert"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".updateActivity"
+            android:name=".UpdateActivity"
             android:label="@string/title_activity_update"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

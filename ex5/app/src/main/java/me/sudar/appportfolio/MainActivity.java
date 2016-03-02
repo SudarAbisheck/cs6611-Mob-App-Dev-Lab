@@ -1,16 +1,15 @@
 package me.sudar.appportfolio;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private StudentDatabase db  = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,15 +30,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.create_button : break;
+            case R.id.create_button :
+                db = new StudentDatabase(this);
+                Toast.makeText(this, "Database Created", Toast.LENGTH_SHORT).show();
+                break;
 
-            case R.id.insert_button : break;
+            case R.id.insert_button :
+                startActivity(new Intent(this, InsertActivity.class));
+                break;
 
-            case R.id.update_button :break;
+            case R.id.update_button :
+                startActivity(new Intent(this, UpdateActivity.class));
+                break;
 
-            case R.id.delete_button : break;
+            case R.id.delete_button :
+                startActivity(new Intent(this, DeleteActivity.class));
+                break;
 
-            case R.id.retrieve_button : break;
+            case R.id.retrieve_button :
+                startActivity(new Intent(this, RetrieveActivity.class));
+                break;
 
 
         }
