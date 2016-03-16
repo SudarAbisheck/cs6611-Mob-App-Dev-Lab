@@ -27,8 +27,6 @@ public class InsertActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        findViewById(R.id.date_picker_button).setOnClickListener(this);
-        findViewById(R.id.reset_button).setOnClickListener(this);
         findViewById(R.id.submit_button).setOnClickListener(this);
 
         nameEditText = (EditText) findViewById(R.id.name_editText);
