@@ -7,10 +7,13 @@
     <string name="library_app_text">Update</string>
     <string name="build_bigger_text">Delete</string>
     <string name="xyz_reader_text">Retrieve</string>
-    <string name="spotify_msg">This Button will launch Spotify Streamer App.</string>
-    <string name="scores_app_msg">This Button will launch Scores App.</string>
-    <string name="library_app_msg">This Button will launch Library App.</string>
-    <string name="build_bigger_msg">This Button will launch Build It Bigger App.</string>
-    <string name="xyz_reader_msg">This Button will launch XYZ Reader App.</string>
-    <string name="capstone_msg">This Button will launch my Capstone App.</string>
+    <string name="cse_string">CSE</string>
+    <string name="it_string">IT</string>
+    <string name="ece_string">ECE</string>
+    <string name="eee_string">EEE</string>
+    <string name="mech_string">MECH</string>
+    <string name="title_activity_insert">INSERT</string>
+    <string name="title_activity_update">updateActivity</string>
+    <string name="title_activity_delete">DeleteActivity</string>
+    <string name="title_activity_retrieve">RetrieveActivity</string>
 </resources>
