@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">RSS feed</string>
+    <string name="app_name">WEATHER RSS READER</string>
+    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 </resources>
