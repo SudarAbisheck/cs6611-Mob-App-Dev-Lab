@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.write_button:
                 String fileName = ((EditText)findViewById(R.id.filename_tv)).getText().toString();
-                String fileContents = ((EditText)findViewById(R.id.filename_tv)).getText().toString();
+                String fileContents = ((EditText)findViewById(R.id.file_contents_tv)).getText().toString();
 
                 if (fileName.isEmpty())
                     Toast.makeText(this, "Please enter a filename", Toast.LENGTH_SHORT).show();
